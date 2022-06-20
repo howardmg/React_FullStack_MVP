@@ -1,0 +1,1 @@
+INSERT INTO todos (action, done) VALUES ('update resume', false);

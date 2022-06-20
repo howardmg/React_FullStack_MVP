@@ -1,0 +1,29 @@
+{
+  "name": "fullstack_mvp",
+  "version": "1.0.0",
+  "description": "Full Stack MVP with Express",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/howardmg/React_FullStack_MVP.git"
+  },
+  "author": "Mike Howard",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/howardmg/React_FullStack_MVP/issues"
+  },
+  "homepage": "https://github.com/howardmg/React_FullStack_MVP#readme",
+  "dependencies": {
+    "bootstrap": "^5.1.3",
+    "concurrently": "^7.2.1",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "pg": "^8.7.3"
+  }
+}
