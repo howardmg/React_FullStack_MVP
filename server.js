@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: "http://localhost:3000",
-    methods: ["GET", "POST", "PATCH"],
+    methods: ["GET", "POST", "PATCH", "DELETE"],
   })
 );
 
@@ -50,7 +50,6 @@ app.post("/todos/add", async (req, res) => {
       `INSERT INTO todos (action, done) VALUES($1, $2) RETURNING*;`,
       [action, done]
     );
-    console.log(data.rows);
     res.json(data.rows);
   } catch (error) {
     res.status(400).send(error.message);
@@ -65,6 +64,19 @@ app.patch("/todos/changeDoneState", async (req, res) => {
       [id]
     );
     res.json("updated completion box");
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
+
+app.delete("/todos/delete", async (req, res) => {
+  let { id } = req.body;
+  try {
+    const data = await pool.query(
+      `DELETE FROM todos WHERE id = $1 RETURNING *`,
+      [id]
+    );
+    res.json(data);
   } catch (error) {
     res.status(400).send(error.message);
   }

@@ -7,6 +7,11 @@ class TodoRows extends React.Component {
       this.props.updateDone(todo);
     };
 
+    const handleDelete = (todo) => {
+      //console.log(todo);
+      this.props.deleteTodo(todo);
+    };
+
     return (
       <tr>
         <td>{this.props.todo.action}</td>
@@ -18,7 +23,12 @@ class TodoRows extends React.Component {
           />
         </td>
         <td>
-          <button className="btn btn-danger">Delete</button>
+          <button
+            className="btn btn-danger"
+            onClick={() => handleDelete(this.props.todo)}
+          >
+            Delete
+          </button>
         </td>
       </tr>
     );

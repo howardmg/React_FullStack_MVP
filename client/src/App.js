@@ -27,6 +27,30 @@ class App extends React.Component {
   }
 
   render() {
+    // Makes delete request to delete from database
+    const deleteTodo = (todo) => {
+      let filtered = this.state.todoItems.filter((item) => {
+        if (item.id !== todo.id) {
+          return item;
+        }
+      });
+      fetch("http://localhost:5555/todos/delete", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(todo),
+      })
+        .then((res) => res.json())
+        .then(() =>
+          this.setState({
+            todoItems: filtered,
+          })
+        )
+        .catch((error) => console.log(error));
+    };
+
+    // Updates table in database with user added To Do item
     const updateTable = () => {
       const input = { action: this.state.newToDo, done: false };
       fetch("http://localhost:5555/todos/add", {
@@ -47,14 +71,15 @@ class App extends React.Component {
         .catch((error) => console.log(error));
     };
 
+    // Adds to state the To Do that was typed into input field
     const taskInput = (event) => {
       this.setState({
         newToDo: event.target.value,
       });
     };
 
+    // Updates completed status in the database
     const updateDone = (todo) => {
-      console.log({ todo });
       fetch("http://localhost:5555/todos/changeDoneState", {
         method: "PATCH",
         body: JSON.stringify({ id: todo.id }),
@@ -81,7 +106,11 @@ class App extends React.Component {
             <UserInput clearedInput={this.state.newToDo} callback={taskInput} />
             <AddButton newTodo={updateTable} />
           </div>
-          <TodoTable todos={this.state.todoItems} updateDone={updateDone} />
+          <TodoTable
+            todos={this.state.todoItems}
+            updateDone={updateDone}
+            deleteTodo={deleteTodo}
+          />
         </div>
       </div>
     );

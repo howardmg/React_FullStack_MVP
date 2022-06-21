@@ -21,6 +21,7 @@ class TodoTable extends React.Component {
                   key={item.id}
                   todo={item}
                   updateDone={this.props.updateDone}
+                  deleteTodo={this.props.deleteTodo}
                 />
               ))
             ) : (
