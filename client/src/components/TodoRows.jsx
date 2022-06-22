@@ -14,17 +14,18 @@ class TodoRows extends React.Component {
 
     return (
       <tr>
-        <td>{this.props.todo.action}</td>
+        <td className="textInput">{this.props.todo.action}</td>
         <td>
           <input
             type="checkbox"
+            className="checkbox"
             checked={this.props.todo.done}
             onChange={() => handleCheckBox(this.props.todo)}
           />
         </td>
         <td>
           <button
-            className="btn btn-danger"
+            className="btn-sm btn-danger"
             onClick={() => handleDelete(this.props.todo)}
           >
             Delete

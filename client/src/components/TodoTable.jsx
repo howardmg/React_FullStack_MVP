@@ -10,7 +10,7 @@ class TodoTable extends React.Component {
         <table className="table">
           <thead>
             <tr>
-              <th>Task</th>
+              <th className="col-9">Task</th>
               <th>Complete</th>
             </tr>
           </thead>

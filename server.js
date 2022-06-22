@@ -60,10 +60,10 @@ app.patch("/todos/changeDoneState", async (req, res) => {
   let { id } = req.body;
   try {
     const data = await pool.query(
-      `UPDATE todos SET done = NOT done WHERE id = $1`,
+      `UPDATE todos SET done = NOT done WHERE id = $1 RETURNING*`,
       [id]
     );
-    res.json("updated completion box");
+    res.json(data.rows);
   } catch (error) {
     res.status(400).send(error.message);
   }

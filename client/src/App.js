@@ -29,11 +29,7 @@ class App extends React.Component {
   render() {
     // Makes delete request to delete from database
     const deleteTodo = (todo) => {
-      let filtered = this.state.todoItems.filter((item) => {
-        if (item.id !== todo.id) {
-          return item;
-        }
-      });
+      let filtered = this.state.todoItems.filter((item) => item.id !== todo.id);
       fetch("http://localhost:5555/todos/delete", {
         method: "DELETE",
         headers: {
